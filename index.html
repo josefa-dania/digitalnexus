@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Lie Detector</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI-Based Lie Detector</h1>
+
+        <!-- Upload Form -->
+        <form action="http://localhost:5000/upload" method="POST" enctype="multipart/form-data">
+            <label for="video">Upload Video:</label>
+            <input type="file" name="video" id="video" accept="video/*" required>
+
+            <label for="audio">Upload Audio:</label>
+            <input type="file" name="audio" id="audio" accept="audio/*" required>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="instructions">
+            <p>Please upload a short video and corresponding audio file for analysis.</p>
+        </div>
+    </div>
+</body>
+</html>
