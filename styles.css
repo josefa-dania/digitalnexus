@@ -1,51 +1,61 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
     background-color: #f4f4f4;
-    padding: 20px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
     max-width: 500px;
-    margin: auto;
+    margin: 50px auto;
     background: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
+h1 {
+    color: #333;
 }
 
 label {
     font-weight: bold;
+    display: block;
+    margin-top: 10px;
 }
 
-input {
+input[type="file"] {
+    width: 100%;
     padding: 10px;
+    margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 button {
-    padding: 10px;
-    background-color: #007bff;
+    background-color: #28a745;
     color: white;
     border: none;
+    padding: 10px 15px;
+    font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #218838;
 }
 
-.instructions {
+#loading {
+    font-size: 18px;
+    color: red;
+    margin-top: 10px;
+}
+
+#result {
+    font-size: 20px;
+    font-weight: bold;
     margin-top: 20px;
-    font-style: italic;
-    color: #666;
 }
