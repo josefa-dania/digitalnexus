@@ -4,45 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Lie Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <div class="container">
+        <h1>AI Lie Detector</h1>
 
-    <h2>Upload Video for Lie Detection</h2>
-    
-    <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" id="videoFile" accept="video/*" required>
-        <button type="button" onclick="uploadFile()">Upload</button>
-    </form>
+        <!-- File Upload Form -->
+        <form method="post" enctype="multipart/form-data">
+            <label for="video">Upload Video:</label>
+            <input type="file" name="video" accept="video/*" required>
 
-    <p id="status"></p>
-    
-    <script>
-        async function uploadFile() {
-            const fileInput = document.getElementById('videoFile');
-            const statusText = document.getElementById('status');
-            if (fileInput.files.length === 0) {
-                statusText.innerText = "Please select a file first!";
-                return;
-            }
+            <label for="audio">Upload Audio:</label>
+            <input type="file" name="audio" accept="audio/*" required>
 
-            const formData = new FormData();
-            formData.append("file", fileInput.files[0]);
+            <button type="submit">Detect Lie</button>
+        </form>
 
-            statusText.innerText = "Uploading...";
-            
-            try {
-                const response = await fetch("https://eager-hounds-teach.loca.lt", {
-                    method: "POST",
-                    body: formData
-                });
-
-                const result = await response.text();
-                statusText.innerText = "Upload Successful! Result: " + result;
-            } catch (error) {
-                statusText.innerText = "Upload failed: " + error;
-            }
-        }
-    </script>
-
+        <!-- Result Section (Only shown if there is a result) -->
+        {% if result %}
+        <div class="result">
+            <h2>Lie Detection Result:</h2>
+            <p>{{ result }}</p>
+            <a href="/">Try Again</a>
+        </div>
+        {% endif %}
+    </div>
 </body>
 </html>
