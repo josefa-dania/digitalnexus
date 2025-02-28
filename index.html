@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Lie Detector</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Lie Detector</title>
 </head>
 <body>
-    <div class="container">
-        <h1>AI Lie Detector</h1>
+    <h2>Upload Video for Lie Detection</h2>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="videoFile" name="file">
+        <button type="button" onclick="uploadVideo()">Upload</button>
+    </form>
+    <p id="result"></p>
 
-        <!-- File Upload Form -->
-        <form method="post" enctype="multipart/form-data">
-            <label for="video">Upload Video:</label>
-            <input type="file" name="video" accept="video/*" required>
+    <script>
+        function uploadVideo() {
+            let formData = new FormData();
+            let fileInput = document.getElementById("videoFile");
+            formData.append("file", fileInput.files[0]);
 
-            <label for="audio">Upload Audio:</label>
-            <input type="file" name="audio" accept="audio/*" required>
-
-            <button type="submit">Detect Lie</button>
-        </form>
-
-        <!-- Result Section (Only shown if there is a result) -->
-        {% if result %}
-        <div class="result">
-            <h2>Lie Detection Result:</h2>
-            <p>{{ result }}</p>
-            <a href="/">Try Again</a>
-        </div>
-        {% endif %}
-    </div>
+            fetch("https://yourname.loca.lt/upload", {  // 👈 REPLACE with your LocalTunnel URL
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerText = "Result: " + data.result;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("result").innerText = "Error processing video.";
+            });
+        }
+    </script>
 </body>
 </html>
