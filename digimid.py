@@ -41,7 +41,6 @@ def detect_lie(emotion_list, stress_list):
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        # Save uploaded files
         video = request.files["video"]
         audio = request.files["audio"]
 
@@ -51,7 +50,6 @@ def index():
         video.save(video_path)
         audio.save(audio_path)
 
-        # Process video
         cap = cv2.VideoCapture(video_path)
         fps = cap.get(cv2.CAP_PROP_FPS)
         frame_interval = int(fps * 2)
@@ -76,13 +74,11 @@ def index():
             frame_count += 1
 
         cap.release()
-
-        # Determine lie detection result
         result = detect_lie(emotion_history, stress_history)
 
-        return render_template("result.html", result=result)
+        return render_template("index.html", result=result)
 
-    return render_template("index.html")
+    return render_template("index.html", result=None)
 
 if __name__ == "__main__":
     app.run(debug=True)
