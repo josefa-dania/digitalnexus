@@ -18,42 +18,11 @@
             <label for="audio">Upload Audio (MP3, WAV):</label>
             <input type="file" name="audio" id="audio" accept="audio/*" required>
 
-            <button type="submit" id="submit-btn">Submit</button>
+            <button type="submit">Submit</button>
         </form>
 
-        <!-- Processing Message -->
-        <p id="processing-message" style="color: red; display: none;">Processing... Please wait.</p>
-
-        <!-- Result Display -->
-        <div id="result"></div>
+        <p style="color: red;">Processing may take some time...</p>
     </div>
-
-    <script>
-        document.querySelector("form").addEventListener("submit", function(event) {
-            event.preventDefault();  // Prevent form from submitting the default way
-
-            // Show processing message
-            document.getElementById("processing-message").style.display = "block";
-
-            // Prepare form data
-            let formData = new FormData(this);
-
-            // Send request to Flask backend
-            fetch("https://1b98-104-196-6-115.ngrok-free.app/upload", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json()) // Get JSON response
-            .then(data => {
-                document.getElementById("processing-message").style.display = "none"; // Hide processing message
-                document.getElementById("result").innerHTML = `<h2>Result: ${data.result}</h2>`; // Display result
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                document.getElementById("result").innerHTML = `<h2 style="color:red;">Error processing request.</h2>`;
-            });
-        });
-    </script>
 </body>
 </html>
 
